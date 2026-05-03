@@ -1,7 +1,7 @@
 package edu.isgb.school.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,7 +23,6 @@ public class Department {
     // Bidirectionnel avec School
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_PK_school")
-    @JsonBackReference
     private School school;
 
 }

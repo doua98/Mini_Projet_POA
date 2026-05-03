@@ -1,7 +1,6 @@
 package edu.isgb.school.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,17 +26,14 @@ public class School {
 
     // Bidirectionnel avec Department
     @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
     private List<Department> departments;
 
     // Bidirectionnel avec Instructor
-    @OneToMany(mappedBy = "school")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "school",cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     private List<Instructor> instructors;
 
     // Bidirectionnel avec Student
     @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
     private List<Student> students;
     /*
     cas 3 bidirectionnel

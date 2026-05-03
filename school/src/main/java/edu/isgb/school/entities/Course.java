@@ -1,7 +1,7 @@
 package edu.isgb.school.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,7 +27,6 @@ public class Course {
 
     // Bidirectionnel avec School
     @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
-    @JsonBackReference
     private List<Instructor> instructors;
 
 }

@@ -29,21 +29,6 @@ public class SchoolService {
 
     // a. Créer une nouvelle School avec Students, Instructors et Departments
     public School createSchool(School school) {
-        if (school.getStudents() != null) {
-            for (Student s : school.getStudents()) {
-                s.setSchool(school);
-            }
-        }
-        if (school.getInstructors() != null) {
-            for (Instructor i : school.getInstructors()) {
-                i.setSchool(school);
-            }
-        }
-        if (school.getDepartments() != null) {
-            for (Department d : school.getDepartments()) {
-                d.setSchool(school);
-            }
-        }
         return schoolRepo.save(school);
     }
 
