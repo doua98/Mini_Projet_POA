@@ -29,7 +29,6 @@ public class Student {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "address_PK_ADDRESS")
-    @JsonManagedReference
     private Address address;
 
     /*
