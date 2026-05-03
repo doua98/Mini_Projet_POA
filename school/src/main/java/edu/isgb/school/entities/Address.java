@@ -1,10 +1,14 @@
 package edu.isgb.school.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 
 @Entity
 @Table(name="t_address")

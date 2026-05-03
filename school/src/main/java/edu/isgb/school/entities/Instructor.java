@@ -1,6 +1,8 @@
 package edu.isgb.school.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,13 +31,15 @@ public class Instructor {
             joinColumns = @JoinColumn(name = "instructors_pk_Instructor"),
             inverseJoinColumns = @JoinColumn(name = "courses_pk_course")
     )
+    @JsonManagedReference
     private List<Course> courses;
 
     @ManyToOne
     @JoinColumn(name="school_PK_school")
+    @JsonBackReference
     private School school;
 
-
-
-
+    /*
+    cas 2bidirectionnel manytomany
+     */
 }

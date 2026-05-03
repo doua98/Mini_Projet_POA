@@ -32,6 +32,7 @@ public class SchoolService {
     private DepartmentRepository departmentRepo;
 
     public School createSchool(School school) {
+
         return schoolRepo.save(school);
     }
 
@@ -44,14 +45,17 @@ public class SchoolService {
     }
 
     public List<Student> Affiche_Students(){
+
         return studentRepo.findAll();
     }
 
     public Instructor createInstructor(Instructor instructor){
+
         return instructorRepo.save(instructor);
     }
 
     public List<Instructor> GetInstructorsByName(String name){
+
         return instructorRepo.getInstructorsByName(name);
     }
 

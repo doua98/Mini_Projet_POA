@@ -1,5 +1,7 @@
 package edu.isgb.school.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,10 +29,15 @@ public class Student {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "address_PK_ADDRESS")
+    @JsonManagedReference
     private Address address;
 
+    /*
+    cas 3 one to one uniderectionel
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_PK_school")
+    @JsonBackReference
     private School school;
 
 }

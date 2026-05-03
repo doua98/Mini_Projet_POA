@@ -1,6 +1,7 @@
 package edu.isgb.school.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class School {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PK_school")
@@ -24,13 +26,19 @@ public class School {
     private Integer phone;
 
     @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Department> departments;
 
     @OneToMany(mappedBy = "school")
+    @JsonManagedReference
     private List<Instructor> instructors;
 
     @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Student> students;
+    /*
+    cas 3 bidirectionnel
+     */
 
 
 }
