@@ -40,13 +40,13 @@ public class TestSchoolController {
     }
 
     // Instructor endpoints
-    @PostMapping("/schools/{schoolId}/instructors")
-    public Instructor createInstructor(@RequestBody Instructor instructor, @PathVariable Integer schoolId) {
-        return schoolService.createInstructor(instructor, schoolId);
+    @PostMapping("/instructors")
+    public Instructor createInstructor(@RequestBody Instructor instructor) {
+        return schoolService.createInstructor(instructor);
     }
 
-    @GetMapping("/instructors/name/{name}")
-    public List<Instructor> getInstructorsByName(@PathVariable String name) {
+    @GetMapping("instructors?name={name}")
+    public List<Instructor> getInstructorsByName(@RequestParam String name) {
         return schoolService.getInstructorsByName(name);
     }
 

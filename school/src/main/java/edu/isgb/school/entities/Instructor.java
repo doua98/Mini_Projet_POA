@@ -1,6 +1,7 @@
 package edu.isgb.school.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+
+@JsonIgnoreProperties({"school"})
 @Entity
 @Table(name="t_instructor")
 @Data

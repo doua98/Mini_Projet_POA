@@ -1,11 +1,14 @@
 package edu.isgb.school.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
 
+
+@JsonIgnoreProperties({"students", "instructors"})
 @Entity
 @Table(name = "t_school")
 @Data

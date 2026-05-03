@@ -51,16 +51,7 @@ public class SchoolService {
         return studentRepo.findAll();
     }
 
-    public Instructor createInstructor(Instructor instructor, Integer schoolId) {
-        School school = schoolRepo.findById(schoolId)
-                .orElseThrow(() -> new RuntimeException("School not found id: " + schoolId));
-        instructor.setSchool(school);
-
-        if (instructor.getCourses() != null) {
-            for (Course c : instructor.getCourses()) {
-                c.getInstructors().add(instructor);
-            }
-        }
+    public Instructor createInstructor(Instructor instructor) {
         return instructorRepo.save(instructor);
     }
 
