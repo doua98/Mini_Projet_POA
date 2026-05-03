@@ -1,6 +1,5 @@
 package edu.isgb.school.test;
 
-
 import edu.isgb.school.entities.Course;
 import edu.isgb.school.entities.Instructor;
 import edu.isgb.school.entities.School;
@@ -30,25 +29,25 @@ public class TestSchoolController {
     }
 
     // Student endpoints
-    @PostMapping("/students")
-    public Student createStudent(@RequestBody Student student) {
-        return schoolService.CreateStudent(student);
+    @PostMapping("/schools/{schoolId}/students")
+    public Student createStudent(@RequestBody Student student, @PathVariable Integer schoolId) {
+        return schoolService.createStudent(student, schoolId);
     }
 
     @GetMapping("/students")
     public List<Student> getAllStudents() {
-        return schoolService.Affiche_Students();
+        return schoolService.listStudents();
     }
 
     // Instructor endpoints
-    @PostMapping("/instructors")
-    public Instructor createInstructor(@RequestBody Instructor instructor) {
-        return schoolService.createInstructor(instructor);
+    @PostMapping("/schools/{schoolId}/instructors")
+    public Instructor createInstructor(@RequestBody Instructor instructor, @PathVariable Integer schoolId) {
+        return schoolService.createInstructor(instructor, schoolId);
     }
 
     @GetMapping("/instructors/name/{name}")
     public List<Instructor> getInstructorsByName(@PathVariable String name) {
-        return schoolService.GetInstructorsByName(name);
+        return schoolService.getInstructorsByName(name);
     }
 
     @GetMapping("/instructors/{id}")
@@ -58,13 +57,11 @@ public class TestSchoolController {
 
     @GetMapping("/instructors/{id}/courses")
     public List<Course> getInstructorCourses(@PathVariable Integer id) {
-        return schoolService.getCourseByInstructorId(id);
+        return schoolService.getCoursesByInstructorId(id);
     }
 
     @PostMapping("/instructors/{id}/courses")
-    public Course addCourseToInstructor(@PathVariable Integer id, @RequestBody Course course) {
-        return schoolService.RajouteCourse(course,id);
+    public Course addCourseToInstructor(@RequestBody Course course, @PathVariable Integer id) {
+        return schoolService.addCourseToInstructor(course, id);
     }
-
-
 }

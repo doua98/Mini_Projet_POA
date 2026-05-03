@@ -17,9 +17,10 @@ public class Department {
     @Column(name = "pk_department")
     private Integer idDepartment;
 
-    @Column(nullable = false,name = "cl_name")
+    @Column(name = "cl_name",nullable = false)
     private String name;
 
+    // Bidirectionnel avec School
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_PK_school")
     @JsonBackReference

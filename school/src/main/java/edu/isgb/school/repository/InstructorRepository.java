@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface InstructorRepository extends JpaRepository<Instructor,Integer> {
-    List<Instructor> getInstructorsByName(String name);
+    List<Instructor> findByName(String name);
     // List <Instructor> findByName(String name);
 }

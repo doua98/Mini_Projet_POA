@@ -22,9 +22,10 @@ public class Instructor {
     @Column(name = "pk_instructor")
     private Integer idInstructor;
 
-    @Column(nullable = false,name = "name_instructor")
+    @Column(name = "name_instructor",nullable = false)
     private String name;
 
+    // Bidirectionnel avec Course
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(
             name = "t_instructor_t_course",
@@ -34,7 +35,8 @@ public class Instructor {
     @JsonManagedReference
     private List<Course> courses;
 
-    @ManyToOne
+    // Bidirectionnel avec School
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="school_PK_school")
     @JsonBackReference
     private School school;

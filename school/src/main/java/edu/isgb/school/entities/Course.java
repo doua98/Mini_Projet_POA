@@ -25,6 +25,7 @@ public class Course {
     @Column(name = "name_course",nullable=false)
     private String name;
 
+    // Bidirectionnel avec School
     @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<Instructor> instructors;

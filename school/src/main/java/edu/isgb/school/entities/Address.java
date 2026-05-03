@@ -8,26 +8,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@JsonIgnoreProperties({"hibernateLazyInitializer"})
 
 @Entity
 @Table(name="t_address")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PK_ADDRESS")
     private Integer idAddress;
 
-    @Column(nullable = false,name = "cl_street")
+    @Column(name = "cl_street",nullable = false)
     private String street;
 
-    @Column(nullable = false,name = "cl_city")
+    @Column(name = "cl_city",nullable = false)
     private String city;
 
-    @Column(nullable = false,name = "cl_postal_Code")
+    @Column(name = "cl_postal_Code",nullable = false)
     private String postalCode;
 
 }

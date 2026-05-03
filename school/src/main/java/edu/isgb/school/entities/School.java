@@ -25,14 +25,17 @@ public class School {
     @Column(nullable = false)
     private Integer phone;
 
+    // Bidirectionnel avec Department
     @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Department> departments;
 
+    // Bidirectionnel avec Instructor
     @OneToMany(mappedBy = "school")
     @JsonManagedReference
     private List<Instructor> instructors;
 
+    // Bidirectionnel avec Student
     @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Student> students;

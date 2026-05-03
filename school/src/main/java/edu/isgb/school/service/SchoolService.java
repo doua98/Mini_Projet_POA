@@ -1,11 +1,7 @@
 package edu.isgb.school.service;
 
-
+import edu.isgb.school.entities.*;
 import edu.isgb.school.repository.*;
-import edu.isgb.school.entities.Course;
-import edu.isgb.school.entities.Instructor;
-import edu.isgb.school.entities.School;
-import edu.isgb.school.entities.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,57 +27,86 @@ public class SchoolService {
     @Autowired
     private DepartmentRepository departmentRepo;
 
+    // a. Créer une nouvelle School avec Students, Instructors et Departments
     public School createSchool(School school) {
-
+        if (school.getStudents() != null) {
+            for (Student s : school.getStudents()) {
+                s.setSchool(school);
+            }
+        }
+        if (school.getInstructors() != null) {
+            for (Instructor i : school.getInstructors()) {
+                i.setSchool(school);
+            }
+        }
+        if (school.getDepartments() != null) {
+            for (Department d : school.getDepartments()) {
+                d.setSchool(school);
+            }
+        }
         return schoolRepo.save(school);
     }
 
-    public School getSchoolById(Integer id){
-        return schoolRepo.findById(id).orElseThrow(() -> new RuntimeException("School not found id: " + id));
+    // b. Retourner une School par id
+    public School getSchoolById(Integer id) {
+        return schoolRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("School not found id: " + id));
     }
 
-    public Student CreateStudent(Student student){
+    // c. Créer un Student
+    public Student createStudent(Student student, Integer schoolId) {
+        School school = schoolRepo.findById(schoolId)
+                .orElseThrow(() -> new RuntimeException("School not found id: " + schoolId));
+        student.setSchool(school);
         return studentRepo.save(student);
     }
 
-    public List<Student> Affiche_Students(){
-
+    // d. Lister tous les Students
+    public List<Student> listStudents() {
         return studentRepo.findAll();
     }
 
-    public Instructor createInstructor(Instructor instructor){
+    public Instructor createInstructor(Instructor instructor, Integer schoolId) {
+        School school = schoolRepo.findById(schoolId)
+                .orElseThrow(() -> new RuntimeException("School not found id: " + schoolId));
+        instructor.setSchool(school);
 
+        if (instructor.getCourses() != null) {
+            for (Course c : instructor.getCourses()) {
+                c.getInstructors().add(instructor);
+            }
+        }
         return instructorRepo.save(instructor);
     }
 
-    public List<Instructor> GetInstructorsByName(String name){
-
-        return instructorRepo.getInstructorsByName(name);
+    // f. Lister les Instructors par nom
+    public List<Instructor> getInstructorsByName(String name) {
+        return instructorRepo.findByName(name);
     }
 
-    public Instructor getInstructorById(Integer id){
-        return instructorRepo.findById(id).orElseThrow(() -> new RuntimeException("Instructor not found with id: " + id));
+    // g. Retourner un Instructor par id
+    public Instructor getInstructorById(Integer id) {
+        return instructorRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Instructor not found id: " + id));
     }
 
-    public Course getCourseById(Integer id){
-        return courseRepo.findById(id).orElseThrow(() -> new RuntimeException("Course not found with id: " + id));
+    // h. Retourner un Course par id
+    public Course getCourseById(Integer id) {
+        return courseRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Course not found id: " + id));
     }
 
-    public List<Course> getCourseByInstructorId(Integer id){
-        Instructor instructor=getInstructorById(id);
+    // i. Lister les Courses d’un Instructor par id
+    public List<Course> getCoursesByInstructorId(Integer id) {
+        Instructor instructor = getInstructorById(id);
         return instructor.getCourses();
-
     }
 
-    public Course RajouteCourse(Course c,Integer instructorId){
+    // j. Ajouter un nouveau Course à un Instructor existant
+    public Course addCourseToInstructor(Course course, Integer instructorId) {
         Instructor instructor = getInstructorById(instructorId);
-
-        instructor.getCourses().add(c);
-        c.getInstructors().add(instructor);
-
-        return courseRepo.save(c);
-
+        instructor.getCourses().add(course);
+        course.getInstructors().add(instructor);
+        return courseRepo.save(course);
     }
-
-
 }

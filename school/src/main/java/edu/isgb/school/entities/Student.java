@@ -27,6 +27,7 @@ public class Student {
     @Column(name = "cl_birthdate",nullable = false)
     private LocalDate birthDate;
 
+    // Unidirectionnel vers Address
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "address_PK_ADDRESS")
     private Address address;
@@ -34,6 +35,8 @@ public class Student {
     /*
     cas 3 one to one uniderectionel
      */
+
+    // Bidirectionnel avec School
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_PK_school")
     @JsonBackReference
