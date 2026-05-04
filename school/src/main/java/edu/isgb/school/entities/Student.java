@@ -1,7 +1,7 @@
 package edu.isgb.school.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 
-@JsonIgnoreProperties({"school"})
 @Entity
 @Table(name="t_student")
 @Data
@@ -41,6 +40,7 @@ public class Student {
     // Bidirectionnel avec School
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_PK_school")
+    @JsonIgnore
     private School school;
 
 }

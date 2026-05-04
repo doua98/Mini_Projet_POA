@@ -82,7 +82,6 @@ public class SchoolService {
     public Course addCourseToInstructor(Course course, Integer instructorId) {
         Instructor instructor = getInstructorById(instructorId);
         instructor.getCourses().add(course);
-        course.getInstructors().add(instructor);
         return courseRepo.save(course);
     }
 }

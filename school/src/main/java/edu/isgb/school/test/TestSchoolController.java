@@ -45,7 +45,7 @@ public class TestSchoolController {
         return schoolService.createInstructor(instructor);
     }
 
-    @GetMapping("instructors?name={name}")
+    @GetMapping("/instructors")
     public List<Instructor> getInstructorsByName(@RequestParam String name) {
         return schoolService.getInstructorsByName(name);
     }
